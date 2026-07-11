@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.techhub.recipeapp.presentation.components.ErrorMessage
 import com.techhub.recipeapp.presentation.components.LoadingIndicator
 import com.techhub.recipeapp.presentation.viewmodel.HomeViewModel
 import com.techhub.recipeapp.ui.theme.Orange
@@ -62,42 +63,11 @@ fun HomeScreen(
             when{
                 viewModel.isLoading -> LoadingIndicator(strokeWidth = 1.dp)
 
-                viewModel.errorMessage !=null ->{
-
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = viewModel.errorMessage ?: "",
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color.Red
+                viewModel.errorMessage !=null ->
+                    ErrorMessage(
+                        errorMessage = viewModel.errorMessage,
+                        onRetry = {viewModel.getRecipes()}
                         )
-
-                        Spacer(modifier = Modifier.height(60.dp))
-
-                        Button(
-                            onClick = {
-                                viewModel.getRecipes()
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 24.dp),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = Orange,
-                                contentColor = Color.White
-                            )
-                        ) {
-
-                            Text(
-                                text = "Retry",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
-                    }
-                }
 
                 else ->{
 
