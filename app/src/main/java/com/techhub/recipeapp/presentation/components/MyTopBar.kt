@@ -28,7 +28,7 @@ fun MyTopBar(
         },
         navigationIcon = {
             IconButton(
-                onClick = {onBackClick}
+                onClick = onBackClick
             ) {
                 Icon(
                     imageVector = icon,

@@ -40,6 +40,7 @@ fun HomeScreen(
 ) {
 
     Scaffold(
+        floatingActionButton = { AddRecipeButton { } },
         topBar = {
             TopAppBar(
                 title = {
@@ -52,6 +53,7 @@ fun HomeScreen(
                 }
             )
         }
+
     ) { innerPadding ->
 
         Box(

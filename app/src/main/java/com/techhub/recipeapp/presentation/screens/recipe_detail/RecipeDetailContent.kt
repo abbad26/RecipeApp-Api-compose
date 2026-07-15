@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -27,8 +28,8 @@ import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material.icons.filled.Whatshot
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,7 +52,8 @@ fun RecipeDetailContent(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = 16.dp)
+            .background(color = Orange.copy(alpha = 0.02f)),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
 
@@ -74,7 +76,7 @@ fun RecipeDetailContent(
                 color = Color.DarkGray
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(4.dp))
             // Row (cuisine, difficulty, meal typ)
 
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -97,47 +99,53 @@ fun RecipeDetailContent(
 
         DetailSection(title = "At a Glance", icon = Icons.Default.Timer) {
 
-            StatsItem(
-                icon = Icons.Default.Schedule,
-                label = "Prep",
-                value = "${details.prepTimeMinutes}m"
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                StatsItem(
+                    icon = Icons.Default.Schedule,
+                    label = "Prep",
+                    value = "${details.prepTimeMinutes}m"
+                )
 
-            HorizontalDivider(
-                modifier = Modifier.height(36.dp),
-                thickness = 1.dp,
-                color = Color.Gray.copy(alpha = 0.2f)
-            )
+                VerticalDivider(
+                    modifier = Modifier.height(36.dp),
+                    thickness = 1.dp,
+                    color = Color.Gray.copy(alpha = 0.5f)
+                )
 
-            StatsItem(
-                icon = Icons.Default.Whatshot,
-                label = "Cooking",
-                value = "${details.cookTimeMinutes}m"
-            )
+                StatsItem(
+                    icon = Icons.Default.Whatshot,
+                    label = "Cooking",
+                    value = "${details.cookTimeMinutes}m"
+                )
 
-            HorizontalDivider(
-                modifier = Modifier.height(36.dp),
-                thickness = 1.dp,
-                color = Color.Gray.copy(alpha = 0.2f)
-            )
+                VerticalDivider(
+                    modifier = Modifier.height(36.dp),
+                    thickness = 1.dp,
+                    color = Color.Gray.copy(alpha = 0.5f)
+                )
 
-            StatsItem(
-                icon = Icons.Default.Egg,
-                label = "Serves",
-                value = "${details.servings}"
-            )
+                StatsItem(
+                    icon = Icons.Default.Egg,
+                    label = "Serves",
+                    value = "${details.servings}"
+                )
 
-            HorizontalDivider(
-                modifier = Modifier.height(36.dp),
-                thickness = 1.dp,
-                color = Color.Gray.copy(alpha = 0.2f)
-            )
+                VerticalDivider(
+                    modifier = Modifier.height(36.dp),
+                    thickness = 1.dp,
+                    color = Color.Gray.copy(alpha = 0.5f)
+                )
 
-            StatsItem(
-                icon = Icons.Default.LocalFireDepartment,
-                label = "Calories",
-                value = "${details.caloriesPerServing}"
-            )
+                StatsItem(
+                    icon = Icons.Default.LocalFireDepartment,
+                    label = "Calories",
+                    value = "${details.caloriesPerServing}"
+                )
+            }
         }
 
         DetailSection(title = "Ingredients", icon = Icons.Default.Restaurant) {
